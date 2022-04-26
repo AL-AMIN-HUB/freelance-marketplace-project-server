@@ -15,7 +15,7 @@ app.use(express.json());
 // const corsOptions = {
 //   origin: ["http://localhost:3000/*", "https://freelance-marketplace-project-client.vercel.app/*"]
 // }
-const corsOption = {
+const corsOptions = {
   origin: "*"
 }
 app.use(cors(corsOptions));
