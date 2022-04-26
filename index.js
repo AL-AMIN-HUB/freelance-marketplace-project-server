@@ -19,6 +19,11 @@ const corsOptions = {
   origin: "*"
 }
 app.use(cors(corsOptions));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 // const corsOptions = {
 //   origin: '*',
 //   credentials: true,            //access-control-allow-credentials:true
