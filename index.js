@@ -1,17 +1,17 @@
 const express = require("express");
-const cors = require("cors");
-require("dotenv").config();
-const port = process.env.PORT || 8000;
+const app = express();
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+const cors = require("cors");
 const authRoute = require("./routes/authRoute");
 const gigsRoute = require("./routes/gigsRoute");
 const reviewRoute = require("./routes/reviewRoute");
 const taskRoute = require("./routes/taskRoute");
-// App initialization here__
-const app = express();
+const port = process.env.PORT || 8000;
+
+
 app.use(express.json());
-
-
+dotenv.config();
 // const corsOptions = {
 //   origin: ["http://localhost:3000/*", "https://freelance-marketplace-project-client.vercel.app/*"]
 // }
