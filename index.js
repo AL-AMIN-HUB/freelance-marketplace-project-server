@@ -9,7 +9,6 @@ const reviewRoute = require("./routes/reviewRoute");
 const taskRoute = require("./routes/taskRoute");
 const port = process.env.PORT || 8000;
 
-
 app.use(express.json());
 dotenv.config();
 // const corsOptions = {
@@ -39,30 +38,40 @@ app.use(cors({ origin: "*" }));
 //   next();
 // })
 app.set("view engine", "ejs");
-main().catch(err => console.log(err));
+main().catch((err) => console.log(err));
 async function main() {
   // Database connection with mongoose___
-  mongoose.connect(process.env.MONGO_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true,
-    useUnifiedTopology: true,
-  })
+  mongoose
+    .connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: true,
+      useUnifiedTopology: true,
+    })
     .then(() => console.log("Connection successfully!"))
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 
   // All Routes Here__
   app.use("/auth/users", authRoute);
   app.use("/auth/gigs", gigsRoute);
-  app.use("/auth/reviews", reviewRoute)
+  app.use("/auth/reviews", reviewRoute);
   app.use("/auth/task", taskRoute);
   // Find hello
   // Main page or Home page__
   app.get("/", (req, res) => {
-    res.render('pages/home')
-  })
+    res.render("pages/home");
+  });
 }
-
+// Error Handle
+app.all("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.headers.append("Access-Control-Allow-Origin", "http://localhost:3002");
+  headers.append("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 // Something
 // function errorHandler(err, req, res, next) {
@@ -74,7 +83,7 @@ async function main() {
 
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);
-})
+});
 // All is well
 // thanks too
 // thanks
