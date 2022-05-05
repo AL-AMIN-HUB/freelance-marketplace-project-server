@@ -73,7 +73,7 @@ app.all("*", function (req, res, next) {
   next();
 });
 
-// Something
+
 // function errorHandler(err, req, res, next) {
 //   if (res.headersSent) {
 //     return next(err);
