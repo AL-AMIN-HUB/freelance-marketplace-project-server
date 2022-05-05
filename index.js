@@ -19,13 +19,13 @@ dotenv.config();
 //   origin: "*"
 // }
 app.use(cors({ origin: "*" }));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'application/json');
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+//   res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'application/json');
+//   next();
+// });
 // const corsOptions = {
 //   origin: '*',
 //   credentials: true,            //access-control-allow-credentials:true
@@ -63,8 +63,8 @@ async function main() {
   })
 }
 
-// Hello error
-// Hello error
+
+// Something
 // function errorHandler(err, req, res, next) {
 //   if (res.headersSent) {
 //     return next(err);
