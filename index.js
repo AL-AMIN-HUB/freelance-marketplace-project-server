@@ -7,6 +7,7 @@ const authRoute = require("./routes/authRoute");
 const gigsRoute = require("./routes/gigsRoute");
 const reviewRoute = require("./routes/reviewRoute");
 const taskRoute = require("./routes/taskRoute");
+const notifyRoute = require("./routes/notifyRoute");
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
@@ -27,15 +28,17 @@ async function main() {
     .then(() => console.log("Connection successfully!"))
     .catch((err) => console.log(err));
 
+  // Main page or Home page__
+  app.get("/", (req, res) => {
+    res.render("pages/home");
+  });
+
   // All Routes Here__
   app.use("/auth/users", authRoute);
   app.use("/auth/gigs", gigsRoute);
   app.use("/auth/reviews", reviewRoute);
   app.use("/auth/task", taskRoute);
-  // Main page or Home page__
-  app.get("/", (req, res) => {
-    res.render("pages/home");
-  });
+  app.use("auth/notifictions", notifyRoute);
 }
 // Error Handle
 app.all("*", function (req, res, next) {
@@ -47,7 +50,6 @@ app.all("*", function (req, res, next) {
   headers.append("Access-Control-Allow-Credentials", "true");
   next();
 });
-
 
 // function errorHandler(err, req, res, next) {
 //   if (res.headersSent) {

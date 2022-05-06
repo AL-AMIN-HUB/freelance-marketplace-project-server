@@ -1,12 +1,16 @@
 const express = require("express");
+const multer = require("multer");
 const mongoose = require("mongoose");
 const notifySchema = require("../schemas/notifySchema");
 const notifyRoute = express.Router();
 const Notify = new mongoose.model("Notify", notifySchema);
-
+const cloudinary = require("../utils/cloudinry");
+const upload = require("../utils/multer");
+const { append } = require("express/lib/response");
 // CREATE A NEW NOTIFICATION
-notifyRoute.post("/", async (req, res) => {
+notifyRoute.post("/", upload.single("image"), async (req, res) => {
   try {
+    const result = await cloudinary.uploader.upload(req.file.path);
     const newUser = await Notify.create(req.body);
     res.status(200).json(newUser);
   } catch (err) {
@@ -43,3 +47,5 @@ notifyRoute.get("/:email", async (req, res) => {
     });
   }
 });
+
+module.exports = notifyRoute;

@@ -1,10 +1,13 @@
 const express = require("express");
-const mongoose = require("monogoose");
+const mongoose = require("mongoose");
 
 const notifySchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
+  },
+  image: {
+    type: String,
   },
   acceptor: {
     type: String,
