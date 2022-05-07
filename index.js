@@ -50,14 +50,6 @@ app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
 
-// Handle Cors Errors HTTP
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);
 });
