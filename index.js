@@ -12,18 +12,20 @@ const { append } = require("express/lib/response");
 const port = process.env.PORT || 8000;
 const app = express();
 
-
 app.use(express.json());
 dotenv.config();
-app.set("view engine", "ejs");
-app.use(cors({ origin: "*" }));
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
-  res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'application/json');
+const corsOptions = {
+  origin: "*",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+app.all("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://localhost:4000");
   next();
 });
+app.set("view engine", "ejs");
 
 // Database connection with mongoose___
 mongoose
