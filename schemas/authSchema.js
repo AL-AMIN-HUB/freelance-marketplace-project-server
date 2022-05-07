@@ -11,13 +11,10 @@ const authSchema = Schema({
   avatar: {
     type: String,
   },
-  cloudinary_avatar_id: {
-    type: String
-  },
   gender: {
     type: String,
     enum: ["male", "female"],
-    required: true
+    required: true,
   },
   thumbnail: {
     type: String,
@@ -27,40 +24,40 @@ const authSchema = Schema({
     required: true,
   },
   about: {
-    type: String
+    type: String,
   },
   skills: {
-    type: String
+    type: String,
   },
   education: {
-    type: String
+    type: String,
   },
   profession: {
     type: String,
-    max: 45
+    max: 45,
   },
   bio: {
     type: String,
-    max: 190
+    max: 190,
   },
   status: {
     type: String,
     required: true,
-    enum: ["buyer", 'seller']
+    enum: ["buyer", "seller"],
   },
   image: {
     type: String,
   },
-  admin:{
-    type : String,
+  admin: {
+    type: String,
   },
-  level:{
-    type : String,
-    enum:["one", "two", "top"]
+  level: {
+    type: String,
+    enum: ["one", "two", "top"],
   },
   date: {
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 module.exports = authSchema;
