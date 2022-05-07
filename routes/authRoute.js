@@ -195,7 +195,7 @@ authRoute.put("/avatar/:id", async (req, res) => {
   try {
     const data = await User.findOneAndUpdate(
       { _id: req.params.id },
-      { $set: { avatar: req.body.avatar } },
+      { $set: { avatar: req.body.avatar } }
     );
     res.status(200).json({
       result: data,
@@ -207,31 +207,42 @@ authRoute.put("/avatar/:id", async (req, res) => {
     });
   }
 });
-// authRoute.put("/avatar/:id", upload.single("image"), async (req, res) => {
-//   const result = await cloudinary.uploader.upload(req.file.path);
-//   await User.updateOne({ _id: req.params.id }, {
-//     $set: {
-//       avatar: result.secure_url,
-//       cloudinary_avatar_id: result.public_id
-//     }
-//   }, (err) => {
-//     if (err) {
-//       res.status(500).json({
-//         error: "There was a server side error!!"
-//       })
-//     } else {
-//       res.status(200).json({
-//         message: "Profile Pic update successfully!"
-//       })
-//     }
-//   })
-// })
+authRoute.post("/avatarrr", upload.single("image"), async (req, res) => {
+  // const result = await cloudinary.uploader.upload(req.file.path);
+  try {
+    console.log(req.file.path);
+    const result = await cloudinary.uploader.upload(req.file.path);
+    console.log(result.secure_url);
+  } catch (err) {
+    console.log(err);
+  }
+  // await User.updateOne(
+  //   { _id: req.params.id },
+  //   {
+  //     $set: {
+  //       avatar: result.secure_url,
+  //       cloudinary_avatar_id: result.public_id,
+  //     },
+  //   },
+  //   (err) => {
+  //     if (err) {
+  //       res.status(500).json({
+  //         error: "There was a server side error!!",
+  //       });
+  //     } else {
+  //       res.status(200).json({
+  //         message: "Profile Pic update successfully!",
+  //       });
+  //     }
+  //   }
+  // );
+});
 // UPDATE USER THUMBNAIL__
 authRoute.put("/banner/:id", async (req, res) => {
   try {
     const data = await User.findOneAndUpdate(
       { _id: req.params.id },
-      { $set: { image: req.body.image } },
+      { $set: { image: req.body.image } }
     );
     res.status(200).json({
       result: data,

@@ -8,6 +8,8 @@ const gigsRoute = require("./routes/gigsRoute");
 const reviewRoute = require("./routes/reviewRoute");
 const taskRoute = require("./routes/taskRoute");
 const notifyRoute = require("./routes/notifyRoute");
+const mailRoute = require("./routes/mailRoute");
+const { append } = require("express/lib/response");
 const port = process.env.PORT || 8000;
 
 app.use(express.json());
@@ -38,18 +40,19 @@ async function main() {
   app.use("/auth/gigs", gigsRoute);
   app.use("/auth/reviews", reviewRoute);
   app.use("/auth/task", taskRoute);
-  app.use("auth/notifictions", notifyRoute);
+  app.use("/auth/notifictions", notifyRoute);
+  app.use("/auth/mails", mailRoute);
 }
 // Error Handle
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
-  headers.append("Access-Control-Allow-Credentials", "true");
-  next();
-});
+// app.all("*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
+//   headers.append("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
 // function errorHandler(err, req, res, next) {
 //   if (res.headersSent) {

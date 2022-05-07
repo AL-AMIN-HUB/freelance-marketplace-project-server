@@ -1,13 +1,17 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-const notifySchema = mongoose.Schema({
+const mailSchema = mongoose.Schema({
   title: {
     type: String,
     required: true,
   },
   image: {
     type: String,
+  },
+  email: {
+    type: String,
+    required: true,
   },
   massege: {
     type: String,
@@ -23,4 +27,4 @@ const notifySchema = mongoose.Schema({
   },
 });
 
-module.exports = notifySchema;
+module.exports = mailSchema;
