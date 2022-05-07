@@ -14,7 +14,7 @@ const port = process.env.PORT || 8000;
 
 app.use(express.json());
 dotenv.config();
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "*" }));
 app.set("view engine", "ejs");
 main().catch((err) => console.log(err));
 async function main() {
