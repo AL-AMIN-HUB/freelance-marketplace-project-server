@@ -36,7 +36,7 @@ authRoute.get("/", async (req, res) => {
 // GET A SINGLE BY --EMAIL-- USERS__
 authRoute.get("/email/:email", async (req, res) => {
   try {
-    const data = await User.find({ email: req.params.email });
+    const data = await User.findOne({ email: req.params.email });
     res.status(200).json({
       result: data,
       message: "Success!",

@@ -9,7 +9,7 @@ const taskRoute = require("./routes/taskRoute");
 const notifyRoute = require("./routes/notifyRoute");
 const mailRoute = require("./routes/mailRoute");
 const { append } = require("express/lib/response");
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
@@ -21,8 +21,22 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.all("*", (req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://localhost:4000");
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.setHeader(
+    "Acces-Control-Allow-Methods",
+    "GET,POST,PUT,PATCH,DELETE",
+    "OPTIONS"
+  );
+  res.setHeader(
+    "Acces-Contorl-Allow-Methods",
+    "Content-Type",
+    "application/json"
+  );
   next();
 });
 app.set("view engine", "ejs");

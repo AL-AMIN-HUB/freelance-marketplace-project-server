@@ -10,8 +10,8 @@ const upload = require("../utils/multer");
 // CREATE A NEW NOTIFICATION
 notifyRoute.post("/", upload.single("image"), async (req, res) => {
   const { title, massege } = req.body;
-  const result = await cloudinary.uploader.upload(req.file.path);
   try {
+    const result = await cloudinary.uploader.upload(req.file.path);
     const newUser = await Notify.create({
       title,
       image: result.secure_url,
