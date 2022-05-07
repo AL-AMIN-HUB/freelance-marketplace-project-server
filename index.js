@@ -1,5 +1,4 @@
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -11,16 +10,15 @@ const notifyRoute = require("./routes/notifyRoute");
 const mailRoute = require("./routes/mailRoute");
 const { append } = require("express/lib/response");
 const port = process.env.PORT || 8000;
+const app = express();
 
 // blocking cors errors:
-const corsOptions = {
+app.use(cors());
+
+var corsOptions = {
   origin: "http://localhost:3000",
-  methods: ["GET", "POST"],
-  allowedHeaders: ["*"],
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
-app.use(cors(corsOptions));
 app.use(express.json());
 dotenv.config();
 app.set("view engine", "ejs");
@@ -49,6 +47,14 @@ app.use("/auth/reviews", reviewRoute);
 app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
+
+// Handle Cors Errors HTTP
+app.all("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
 
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);
