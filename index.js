@@ -14,7 +14,7 @@ const port = process.env.PORT || 8000;
 
 app.use(express.json());
 dotenv.config();
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "http://localhost:3000" }));
 app.set("view engine", "ejs");
 main().catch((err) => console.log(err));
 async function main() {
@@ -44,15 +44,15 @@ async function main() {
   app.use("/auth/mails", mailRoute);
 }
 // Error Handle
-// app.all("*", function (req, res, next) {
-//   res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-//   res.header("Access-Control-Allow-Headers", "Content-Type");
-//   res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
-//   headers.append("Access-Control-Allow-Credentials", "true");
-//   next();
-// });
+app.all("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
+  headers.append("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 // function errorHandler(err, req, res, next) {
 //   if (res.headersSent) {
