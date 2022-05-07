@@ -7,25 +7,19 @@ const Mail = new mongoose.model("Mail", mailSchema);
 const cloudinary = require("../utils/cloudinry");
 const upload = require("../utils/multer");
 
-// CREATE A NEW NOTIFICATION
-mailRoute.post("/", upload.single("image"), async (req, res) => {
-  const { title, email, massege } = req.body;
+// CREATE A NEW MAIL
+mailRoute.post("/", async (req, res) => {
+  console.log(req.body);
   try {
-    const result = await cloudinary.uploader.upload(req.file.path);
-    const newUser = await Mail.create({
-      title,
-      image: result.secure_url,
-      email,
-      massege,
-    });
+    const newUser = await Mail.create(req.body);
     res.status(200).json(newUser);
   } catch (err) {
     res.status(500).json({
       error: "There was a server side error!",
     });
+    console.log("Error ");
   }
 });
-
 // GET ALL NOTIFICATIONS
 mailRoute.get("/", async (req, res) => {
   try {
