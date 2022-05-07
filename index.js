@@ -14,10 +14,8 @@ const port = process.env.PORT || 8000;
 
 app.use(express.json());
 dotenv.config();
-app.use(cors({ origin: "*" }));
 app.set("view engine", "ejs");
-main().catch((err) => console.log(err));
-async function main() {
+
   // Database connection with mongoose___
   mongoose
     .connect(process.env.MONGO_URL, {
@@ -43,27 +41,15 @@ async function main() {
   app.use("/auth/notifictions", notifyRoute);
   app.use("/auth/mails", mailRoute);
 
-  // Error Handle
-  app.all("*", function (req, res, next) {
-    res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header(
-      "Access-Control-Allow-Methods",
-      "PUT, GET, POST, DELETE, OPTIONS"
-    );
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
-    headers.append("Access-Control-Allow-Credentials", "true");
-    next();
-  });
+  // blocking cors errors:
+const corsOptions = {
+  origin: 'http://localhost:3000',
+  methods: ["GET", "POST"],
+  allowedHeaders: ["*"],
+  credentials: true,            //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
 }
-
-// function errorHandler(err, req, res, next) {
-//   if (res.headersSent) {
-//     return next(err);
-//   }
-//   res.status(500).json({ error: err })
-// }
+app.use(cors(corsOptions))
 
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);
