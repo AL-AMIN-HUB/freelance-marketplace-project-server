@@ -12,16 +12,18 @@ const { append } = require("express/lib/response");
 const port = process.env.PORT || 8000;
 const app = express();
 
-// blocking cors errors:
-app.use(cors());
 
-var corsOptions = {
-  origin: "http://localhost:3000",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
 app.use(express.json());
 dotenv.config();
 app.set("view engine", "ejs");
+app.use(cors({ origin: "*" }));
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Acces-Control-Allow-Methods', 'GET,POST,PUT,PATCH,DELETE');
+  res.setHeader('Acces-Contorl-Allow-Methods', 'Content-Type', 'application/json');
+  next();
+});
 
 // Database connection with mongoose___
 mongoose
