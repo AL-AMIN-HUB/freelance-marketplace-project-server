@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const path = require("path");
 const authRoute = require("./routes/authRoute");
 const gigsRoute = require("./routes/gigsRoute");
 const reviewRoute = require("./routes/reviewRoute");
@@ -12,15 +13,21 @@ const { append } = require("express/lib/response");
 const port = process.env.PORT || 5000;
 const app = express();
 
+// SETUP CONFIGURATION MIDDLEWARE
 app.use(express.json());
 dotenv.config();
+console.log(__dirname, "./public");
+const staticPath = path.join(__dirname, "./public");
+app.use(express.static(staticPath));
+
+// Set Cors for cross origin resource sharing
 const corsOptions = {
   origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-
 app.use(cors(corsOptions));
+// SETUP RESPONSE HEADERS MIDDLEWARE OR ACCESS CONTROL HEADERS
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
@@ -39,7 +46,6 @@ app.use(function (req, res, next) {
   );
   next();
 });
-app.set("view engine", "ejs");
 
 // Database connection with mongoose___
 mongoose
@@ -55,7 +61,7 @@ mongoose
 
 // Main page or Home page__
 app.get("/", (req, res) => {
-  res.render("pages/home");
+  res.send("Welcome to the home page");
 });
 
 // All Routes Here__

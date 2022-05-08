@@ -89,13 +89,11 @@ authRoute.delete("/:id", async (req, res) => {
   }
 });
 // UPDATE USER ABOUT___
-authRoute.put("/about/:id", async (req, res) => {
+authRoute.patch("/about/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { about: req.body.about } },
-      { new: true }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "About updated successfully!",
@@ -107,13 +105,11 @@ authRoute.put("/about/:id", async (req, res) => {
   }
 });
 // UPDATE USER SKILLS___
-authRoute.put("/skills/:id", async (req, res) => {
+authRoute.patch("/skills/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { skills: req.body.skills } },
-      { new: true }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "Skills updated successfully!",
@@ -125,13 +121,11 @@ authRoute.put("/skills/:id", async (req, res) => {
   }
 });
 // UPDATE USER EDUCATION__
-authRoute.put("/education/:id", async (req, res) => {
+authRoute.patch("/education/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { education: req.body.education } },
-      { new: true }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "Education updated successfully!",
@@ -142,35 +136,27 @@ authRoute.put("/education/:id", async (req, res) => {
     });
   }
 });
-// UPDATE USER PROFESSION__
-authRoute.put("/profession/:id", async (req, res) => {
-  await User.updateOne(
-    { _id: req.params.id },
-    {
-      $set: {
-        profession: req.body.profession,
-      },
-    },
-    (err) => {
-      if (err) {
-        res.status(500).json({
-          error: "There was a server side error!!",
-        });
-      } else {
-        res.status(200).json({
-          message: "Profession update successfully!!",
-        });
-      }
-    }
-  );
+authRoute.patch("/profession/:id", async (req, res) => {
+  try {
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
+    res.status(200).json({
+      result: data,
+      message: "Profession updated successfully!",
+    });
+  } catch (err) {
+    res.status(500).json({
+      error: "There was server side error!",
+    });
+  }
 });
 // UPDATE USER BIO__
-authRoute.put("/bio/:id", async (req, res) => {
+authRoute.patch("/bio/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { bio: req.body.bio } }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "Bio updated successfully!",
@@ -181,22 +167,12 @@ authRoute.put("/bio/:id", async (req, res) => {
     });
   }
 });
-// Image upload__
-// authRoute.post("/uploaded", , async (req, res) => {
-//   try {
-
-//     console.log(result);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// })
 // UPDATE USER AVATAR__
-authRoute.put("/avatar/:id", async (req, res) => {
+authRoute.patch("/avatar/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { avatar: req.body.avatar } }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "Education updated successfully!",
@@ -207,43 +183,12 @@ authRoute.put("/avatar/:id", async (req, res) => {
     });
   }
 });
-authRoute.post("/avatarrr", upload.single("image"), async (req, res) => {
-  // const result = await cloudinary.uploader.upload(req.file.path);
-  try {
-    console.log(req.file.path);
-    const result = await cloudinary.uploader.upload(req.file.path);
-    console.log(result.secure_url);
-  } catch (err) {
-    console.log(err);
-  }
-  // await User.updateOne(
-  //   { _id: req.params.id },
-  //   {
-  //     $set: {
-  //       avatar: result.secure_url,
-  //       cloudinary_avatar_id: result.public_id,
-  //     },
-  //   },
-  //   (err) => {
-  //     if (err) {
-  //       res.status(500).json({
-  //         error: "There was a server side error!!",
-  //       });
-  //     } else {
-  //       res.status(200).json({
-  //         message: "Profile Pic update successfully!",
-  //       });
-  //     }
-  //   }
-  // );
-});
 // UPDATE USER THUMBNAIL__
-authRoute.put("/banner/:id", async (req, res) => {
+authRoute.patch("/banner/:id", async (req, res) => {
   try {
-    const data = await User.findOneAndUpdate(
-      { _id: req.params.id },
-      { $set: { image: req.body.image } }
-    );
+    const data = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
     res.status(200).json({
       result: data,
       message: "Banner updated successfully!",
@@ -254,25 +199,6 @@ authRoute.put("/banner/:id", async (req, res) => {
     });
   }
 });
-// authRoute.put("/banner/:id", upload.single("image"), async (req, res) => {
-//   const result = await cloudinary.uploader.upload(req.file.path);
-//   await User.updateOne({ _id: req.params.id }, {
-//     $set: {
-//       image: result.secure_url,
-//       cloudinary_banner_id: result.public_id
-//     }
-//   }, (err) => {
-//     if (err) {
-//       res.status(500).json({
-//         error: "There was a server side error!!"
-//       })
-//     } else {
-//       res.status(200).json({
-//         message: "User profile thumbnail update successfully!!"
-//       })
-//     }
-//   })
-// })
 
 // CREATE OR UPDATE SELLER LEVEL_____
 //  SET LEVEL ONE___
@@ -387,3 +313,5 @@ authRoute.put("/remove/admin/:email", async (req, res) => {
 
 module.exports = authRoute;
 // Welcome to gsb soft
+// authRoute.put("/banner/:id", upload.single("image"), async (req, res) => {
+//   const result = await cloudinary.uploader.upload(req.file.path)
