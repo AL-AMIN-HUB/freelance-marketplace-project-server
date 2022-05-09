@@ -1,11 +1,8 @@
 const express = require("express");
-const multer = require("multer");
 const mongoose = require("mongoose");
 const mailSchema = require("../schemas/mailSchema");
 const mailRoute = express.Router();
 const Mail = new mongoose.model("Mail", mailSchema);
-const cloudinary = require("../utils/cloudinry");
-const upload = require("../utils/multer");
 
 // CREATE A NEW MAIL
 mailRoute.post("/", async (req, res) => {

@@ -1,5 +1,4 @@
 const express = require("express");
-const multer = require("multer");
 const mongoose = require("mongoose");
 const notifySchema = require("../schemas/notifySchema");
 const notifyRoute = express.Router();

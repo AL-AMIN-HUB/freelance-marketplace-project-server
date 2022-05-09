@@ -1,11 +1,8 @@
 const express = require("express");
-const multer = require("multer");
 const authSchema = require("../schemas/authSchema");
 const mongoose = require("mongoose");
 const authRoute = express.Router();
 const User = new mongoose.model("User", authSchema);
-const cloudinary = require("../utils/cloudinry");
-const upload = require("../utils/multer");
 const { append } = require("express/lib/response");
 
 // CREATE A NEW USER___
