@@ -4,275 +4,86 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Endgame api home page</title>
-    <!-- Google Fonts link for text -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Send+Flowers&display=swap"
-      rel="stylesheet"
-    />
+    <title>Server</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap");
       *,
-      *::after,
-      *::before {
+      *::before,
+      *::after {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: "Send Flowers", cursive;
+        font-family: "Montserrat", sans-serif;
       }
       body {
-        background: #23180d;
+        font-family: "Montserrat", sans-serif;
       }
-      main {
-        padding: 0 1rem;
+      .body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #23180d;
+        width: 100%;
+        height: 100vh;
       }
       .container {
         width: 100%;
-        max-width: 900px;
-        margin: 0 auto;
-        border: 2px solid #e83a3b;
-        border-radius: 8px;
-        margin-top: 2rem;
-        padding: 2rem;
+        max-width: 600px;
+        display: flex;
+        min-height: 85vh;
+        align-items: center;
+        justify-content: center;
+        border: 8px solid #fff;
+        border-radius: 40px;
+        color: #fff;
+        flex-direction: column;
       }
-      .header h1 {
-        font-size: 1.8rem;
-        color: #ffffff;
-        text-align: center;
-        padding-bottom: 1rem;
-        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-        font-weight: 500;
-      }
-      .body {
-        background: #824911;
-        min-height: 300px;
-        border-radius: 10px;
-        border: 2px solid #ffffff;
-        padding: 1.5rem;
-      }
-      .navigation .nav_wrapper {
+      .box {
+        width: 170px;
+        height: 170px;
+        border-radius: 50%;
+        border: 1rem dotted #fff;
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      .navigation .nav_items {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .navigation .nav_item {
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        padding: 0.4rem 1rem;
-        background: #ffffff;
-        color: #824911;
-        font-weight: 600;
-        margin: 0.2rem 0.2rem;
-        border-radius: 50px;
-        min-width: 125px;
-        display: inline-block;
-        text-align: center;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        cursor: pointer;
-        transition: all 0.4s linear;
-      }
-      .users_api_info .info_min_box {
-        background: #23180d;
-        color: #ffffff;
-        margin: 0.5rem 0;
-        border-radius: 50px;
-      }
-      .users_api_info ul {
-        padding: 0 1rem;
-      }
-      .users_api_info li.info_min_box {
-        padding: 0.3rem 0.4rem;
-      }
-      .info_min_box {
-        display: flex;
-      }
-      .info_min_box .main_text {
-        width: 20%;
-      }
-      .info_min_box .copy_text {
+      .box-child {
         width: 80%;
+        height: 80%;
+        border-radius: 50%;
+        background: #fff;
       }
-      .body_info h1 {
-        font-size: 1.1rem;
-        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        font-style: italic;
-        padding: 0.3rem;
-        text-align: center;
+      h1 {
+        border: 1rem dotted #fff;
+        padding: 1rem;
+        padding-bottom: none;
+        border-top: none;
+        border-radius: 2rem;
+        overflow: hidden;
       }
-      .main_text {
-        font-family: "Courier New", Courier, monospace;
-        font-weight: 900;
-      }
-      .copy_text {
-        font-weight: 600;
-        cursor: copy;
-      }
-      .info_min_box[title] {
-        /* font-size: 1.2rem; */
-        color: #ffffff;
-        background: #23180d;
+      h2 {
+        height: 150px;
+        width: 80%;
+        padding-bottom: 1rem;
+        border-radius: 50%;
+        border: 1rem dotted #fff;
+        border-bottom: none;
+        border-left: none;
+        border-right: none;
+        position: relative;
+        bottom: -5rem;
       }
     </style>
   </head>
   <body>
-    <main>
+    <div class="body">
       <div class="container">
-        <div class="header">
-          <h1>Our project Api!</h1>
+        <div class="box">
+          <div class="box-child"></div>
         </div>
-        <div class="body">
-          <div class="navigation">
-            <div class="nav_wrapper">
-              <div id="nav_items"></div>
-            </div>
-          </div>
-          <div class="body_info">
-            <div class="users_api_info">
-              <section>
-                <h1 class="info_min_box">
-                  Here all api link and routes for create user delete user
-                  update user info
-                </h1>
-                <ul>
-                  <li class="info_min_box">
-                    <strong class="main_text">Get All : </strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                      ></span
-                    ></span>
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Get By Id : </strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Get By Email :</strong>
-                    <span class="copy_text"
-                      ><span
-                        >https://dry-plains-53771.herokuapp.com/auth/users</span
-                      >/email/codergalib@gmail.com</span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Post One : </strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Delete One</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Put About</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/about/id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Put Skills</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/skills/:id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Put Education</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/education/:id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Put Profession</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/profession/:id</span
-                      ></span
-                    >
-                  </li>
-                  <li class="info_min_box">
-                    <strong class="main_text">Put Bio</strong>
-                    <span class="copy_text"
-                      >https://dry-plains-53771.herokuapp.com/auth/users<span
-                        >/bio/:id</span
-                      ></span
-                    >
-                  </li>
-                </ul>
-              </section>
-            </div>
-          </div>
-        </div>
+        <h2></h2>
+        <h1>Welcome to my server!</h1>
       </div>
-    </main>
-    <script>
-      const allRoute = ["User", "Gigs", "Reviews", "Banner", "Certificate"];
-      const allPages = ["User", "Gigs", "Reviews", "Banner", "Certificate"];
-      const nav_items = document.getElementById("nav_items");
-      allRoute.forEach((nav_text) => {
-        let nav_item = document.createElement("span");
-        nav_item.innerText = nav_text;
-        nav_item.classList.add("nav_item");
-        nav_items.appendChild(nav_item);
-      });
-      document.querySelectorAll(".nav_item").forEach((item) => {
-        item.addEventListener("click", function () {});
-      });
-      const apiBoxes = document.querySelectorAll(".copy_text");
-      for (let api of apiBoxes) {
-        let active = false;
-        api.addEventListener("click", () => {
-          active = true;
-          if (active) {
-            api.parentElement.style.background = "#fff";
-            api.parentElement.style.color = "#23180d";
-          }
-          setInterval(() => {
-            active = false;
-            console.log(active);
-            if (!active) {
-              api.parentElement.style.color = "#fff";
-              api.parentElement.style.background = "#23180d";
-            }
-          }, 1000);
-          navigator.clipboard.writeText(api.innerText);
-        });
-      }
-      const main_info_boxes = document.querySelectorAll(".info_min_box");
-      for (let main_info_box of main_info_boxes) {
-        main_info_box.addEventListener("mouseover", () => {
-          main_info_box.setAttribute("title", "Copy to clipboard!");
-        });
-      }
-    </script>
+    </div>
   </body>
 </html>
-<!-- document.querySelectorAll(".select").forEach( item => {
-  item.addEventListener('click', arrow => {
-  document.body.style.backgroundImage = `url("${background_list[index]}")`
-})}) -->

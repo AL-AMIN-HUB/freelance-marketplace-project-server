@@ -3,7 +3,6 @@ const authSchema = require("../schemas/authSchema");
 const mongoose = require("mongoose");
 const authRoute = express.Router();
 const User = new mongoose.model("User", authSchema);
-const { append } = require("express/lib/response");
 
 // CREATE A NEW USER___
 authRoute.post("/", async (req, res) => {
