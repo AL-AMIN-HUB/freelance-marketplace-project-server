@@ -9,23 +9,17 @@ const reviewRoute = require("./routes/reviewRoute");
 const taskRoute = require("./routes/taskRoute");
 const notifyRoute = require("./routes/notifyRoute");
 const mailRoute = require("./routes/mailRoute");
-const { append } = require("express/lib/response");
-const port = process.env.PORT || 5000;
+const { corsOptions } = require("./config/cors");
 const app = express();
 
 // SETUP CONFIGURATION MIDDLEWARE
 app.use(express.json());
 dotenv.config();
-console.log(__dirname, "./public");
-const staticPath = path.join(__dirname, "./public");
+const staticPath = path.join(__dirname, "../public");
 app.use(express.static(staticPath));
 
 // Set Cors for cross origin resource sharing
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+
 app.use(cors(corsOptions));
 // SETUP RESPONSE HEADERS MIDDLEWARE OR ACCESS CONTROL HEADERS
 app.use(function (req, res, next) {
@@ -72,9 +66,7 @@ app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
 
-app.listen(port, (req, res) => {
-  console.log(`Server is running in port no ${port}`);
-});
+module.exports = app;
 // endgamesecuremarketplace
 // fg1UOjQEJMpH6Bqv
 // mongodb+srv://freelancemarketplace:wakibnSm5GKQDbKv@cluster0.wnq6s.mongodb.net/marketplaceFreelance?retryWrites=true&w=majority
