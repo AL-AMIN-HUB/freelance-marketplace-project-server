@@ -10,6 +10,7 @@ const taskRoute = require("./routes/taskRoute");
 const notifyRoute = require("./routes/notifyRoute");
 const mailRoute = require("./routes/mailRoute");
 const { append } = require("express/lib/response");
+const supporRoute = require("./routes/supportRoute");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -71,6 +72,7 @@ app.use("/auth/reviews", reviewRoute);
 app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
+app.use("/auth/support", supporRoute);
 
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);
