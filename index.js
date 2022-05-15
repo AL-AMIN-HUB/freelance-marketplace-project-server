@@ -28,9 +28,9 @@ dotenv.config();
 // app.use(cors(corsOptions));
 app.options(
   "*",
-  cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 })
+  cors({ origin: "*", optionsSuccessStatus: 200 })
 );
-app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
+app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 // SETUP RESPONSE HEADERS MIDDLEWARE OR ACCESS CONTROL HEADERS
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
