@@ -11,6 +11,7 @@ const notifyRoute = require("./routes/notifyRoute");
 const mailRoute = require("./routes/mailRoute");
 const { append } = require("express/lib/response");
 const supporRoute = require("./routes/supportRoute");
+const jobRoute = require("./routes/jobsRoute");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -73,6 +74,18 @@ app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
 app.use("/auth/support", supporRoute);
+app.use("/auth/jobs", jobRoute)
+
+
+app.all("*", function (req, res, next) {
+  res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.headers.append("Access-Control-Allow-Origin", "http://localhost:3000");
+  headers.append("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.listen(port, (req, res) => {
   console.log(`Server is running in port no ${port}`);

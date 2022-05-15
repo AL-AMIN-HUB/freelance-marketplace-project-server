@@ -6,7 +6,6 @@ const Mail = new mongoose.model("Mail", mailSchema);
 
 // CREATE A NEW MAIL
 mailRoute.post("/", async (req, res) => {
-  console.log(req.body);
   try {
     const newUser = await Mail.create(req.body);
     res.status(200).json(newUser);
@@ -14,7 +13,6 @@ mailRoute.post("/", async (req, res) => {
     res.status(500).json({
       error: "There was a server side error!",
     });
-    console.log("Error ");
   }
 });
 // GET ALL NOTIFICATIONS
