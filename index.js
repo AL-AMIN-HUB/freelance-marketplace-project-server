@@ -17,17 +17,19 @@ const app = express();
 // SETUP CONFIGURATION MIDDLEWARE
 app.use(express.json());
 dotenv.config();
-console.log(__dirname, "./public");
-const staticPath = path.join(__dirname, "./public");
-app.use(express.static(staticPath));
 
 // Set Cors for cross origin resource sharing
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "*",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+// app.use(cors(corsOptions));
+app.options(
+  "*",
+  cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 })
+);
+app.use(cors({ origin: "http://localhost:3000", optionsSuccessStatus: 200 }));
 // SETUP RESPONSE HEADERS MIDDLEWARE OR ACCESS CONTROL HEADERS
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -53,9 +55,7 @@ mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
   })
   .then(() => console.log("Connection successfully!"))
   .catch((err) => console.log(err));
