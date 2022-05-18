@@ -12,6 +12,7 @@ const mailRoute = require("./routes/mailRoute");
 const { append } = require("express/lib/response");
 const supporRoute = require("./routes/supportRoute");
 const jobRoute = require("./routes/jobsRoute");
+const userRoute = require("./routes/userRoute");
 const port = process.env.PORT || 5000;
 const app = express();
 
@@ -74,7 +75,8 @@ app.use("/auth/task", taskRoute);
 app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
 app.use("/auth/support", supporRoute);
-app.use("/auth/jobs", jobRoute)
+app.use("/auth/jobs", jobRoute);
+app.use('/auth/job-creator', userRoute);
 
 
 app.all("*", function (req, res, next) {
