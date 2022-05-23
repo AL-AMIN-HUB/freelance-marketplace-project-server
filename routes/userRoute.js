@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const express = require("express");
 const JobCreator = require("../schemas/userSchema");
-
+const bcrypt = require("bcryptjs");
 const userRoute = express.Router();
 userRoute.get("/users", async (req, res) => {
   try {
@@ -53,13 +53,16 @@ userRoute.post("/signin", async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: "Please enter all fields" });
     }
-    console.log(email, password);
     const userLogging = await JobCreator.findOne({ email });
-
     if (userLogging) {
-      res.status(200).json({ message: "User logged in successfully" });
+      const isMatch = await bcrypt.compare(password, userLogging.password);
+      if (!isMatch) {
+        res.status(400).json({ message: "Invalid Credientials" });
+      } else {
+        res.status(200).json({ message: "User logged in successfully" });
+      }
     } else {
-      res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "User does not Found!" });
     }
   } catch (err) {
     res.status(500).json({ message: err.message });
