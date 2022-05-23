@@ -27,10 +27,7 @@ dotenv.config();
 //   optionSuccessStatus: 200,
 // };
 // app.use(cors(corsOptions));
-app.options(
-  "*",
-  cors({ origin: "*", optionsSuccessStatus: 200 })
-);
+app.options("*", cors({ origin: "*", optionsSuccessStatus: 200 }));
 app.use(cors({ origin: "*", optionsSuccessStatus: 200 }));
 // SETUP RESPONSE HEADERS MIDDLEWARE OR ACCESS CONTROL HEADERS
 app.use(function (req, res, next) {
@@ -76,8 +73,7 @@ app.use("/auth/notifictions", notifyRoute);
 app.use("/auth/mails", mailRoute);
 app.use("/auth/support", supporRoute);
 app.use("/auth/jobs", jobRoute);
-app.use('/auth/job-creator', userRoute);
-
+app.use("/auth/job-creator", userRoute);
 
 app.all("*", function (req, res, next) {
   res.header("Access-Control-Allow-Headers : Origin, Content-Type, Accept");
